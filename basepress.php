@@ -40,6 +40,8 @@ class Basepress {
 		$this->add_setting( 'version', '0.1.0' );
 		$this->get_settings();
 
+		add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
+
 	}
 
 	/**
@@ -89,6 +91,28 @@ class Basepress {
 		unset( $this->settings[ $name ] );
 		$this->save_settings();
 
+	}
+
+	public function add_settings_page() {
+
+		add_options_page(
+			'Manage Features',
+			'Features',
+			'manage_options',
+			'basepress',
+			array( $this, 'render_settings_page' )
+		);
+
+	}
+
+	public function render_settings_page() {
+		?>
+
+		<div class="wrap">
+			<h2>Manage Features</h2>
+
+		</div>
+		<?php
 	}
 
 }
